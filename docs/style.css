@@ -1,0 +1,107 @@
+/* 1. Global Reset & Defaults */
+:root {
+    --primary-blue: #0077B6; /* A professional, modern blue */
+    --text-dark: #333333;
+    --background-light: #f4f7f6; /* Very light grey */
+    --card-white: #ffffff;
+    --border-grey: #e0e0e0;
+    --font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Body & Layout */
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: var(--card-white);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtle shadow for depth */
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+/* 3. Typography */
+header h1 {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+}
+
+main p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    color: #555555;
+}
+
+/* 4. Subdomain Link Styling */
+.subdomain-list {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.subdomain-link {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: #e6f3ff; /* Very light blue background for the link button */
+    border: 1px solid var(--primary-blue);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    color: var(--primary-blue);
+    font-weight: 600;
+    font-size: 1.05em;
+    gap: 15px; /* Space between logo and text */
+}
+
+.subdomain-link:hover {
+    background-color: var(--primary-blue);
+    color: var(--card-white);
+    box-shadow: 0 4px 8px rgba(0, 119, 182, 0.4);
+    transform: translateY(-2px);
+}
+
+.subdomain-link:hover .logo {
+    /* Optional: If using an SVG, you can change its fill color on hover */
+    filter: brightness(0) invert(1); 
+}
+
+.logo {
+    height: 30px; /* Sizing the logo */
+    width: 30px;
+    /* This filter is a placeholder. It assumes your logo is a dark color. 
+       It turns the dark logo white for the hover state. */
+    transition: filter 0.2s ease-in-out;
+}
+
+/* 5. Footer (Optional) */
+footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+footer p {
+    font-size: 0.8em;
+    color: #aaaaaa;
+}
