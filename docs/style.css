@@ -1,11 +1,19 @@
-/* 1. Global Reset & Defaults */
+/* --- Base Styling and Modern Reset --- */
 :root {
-    --primary-blue: #0077B6; /* A professional, modern blue */
-    --text-dark: #333333;
-    --background-light: #f4f7f6; /* Very light grey */
-    --card-white: #ffffff;
-    --border-grey: #e0e0e0;
-    --font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    /* Light Mode Variables (Default) */
+    --bg-color: #eef2f5; /* Subtle off-white background */
+    --card-bg: #ffffff;
+    --primary-color: #0077c9; /* Modern Blue */
+    --text-color: #333;
+    --secondary-text: #666;
+    --border-radius: 12px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    
+    /* Dark Mode Variables */
+    --dark-bg: #1c2128;
+    --dark-card-bg: #282f38;
+    --dark-text-color: #eef2f5;
+    --dark-secondary-text: #aeb4be;
 }
 
 * {
@@ -14,94 +22,250 @@
     padding: 0;
 }
 
-/* 2. Body & Layout */
+/* --- A. Full-Page Layout for Sticky Footer Fix --- */
+html, body {
+    height: 100%;
+}
+
 body {
-    font-family: var(--font-family);
-    background-color: var(--background-light);
-    color: var(--text-dark);
+    /* Set body to Flex Column (main vertical container) */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+    
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 0;
 }
 
-.container {
-    background-color: var(--card-white);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtle shadow for depth */
-    max-width: 600px;
+.content-wrap {
+    /* This wrapper takes ALL available vertical space, pushing the footer down */
+    flex-grow: 1;
+    
+    /* Make sure the content stays centered within the page */
+    max-width: 800px;
     width: 100%;
-    text-align: center;
+    align-self: center;
+    padding: 0 20px 0;
 }
 
-/* 3. Typography */
-header h1 {
-    font-size: 2.2em;
-    font-weight: 700;
-    color: var(--primary-blue);
+/* --- Header Styling --- */
+.header {
+    text-align: center;
     margin-bottom: 20px;
+    padding: 20px 0;
+    flex-shrink: 0;
 }
 
-main p {
+.header h1 {
+    font-size: 2.5em;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: var(--secondary-text);
     font-size: 1.1em;
-    margin-bottom: 30px;
-    color: #555555;
 }
 
-/* 4. Subdomain Link Styling */
-.subdomain-list {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+/* --- Main Content Styling --- */
+main {
+    /* Main is a simple block container, not stretched by body's flex */
+    padding-bottom: 20px; /* Space above footer */
 }
 
-.subdomain-link {
+/* --- Service List & Card Layout --- */
+.service-list {
+    display: grid;
+    gap: 15px;
+}
+
+.service-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden; 
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Card Header (Visible Part) --- */
+.redirect-card {
     display: flex;
     align-items: center;
-    padding: 15px 25px;
-    background-color: #e6f3ff; /* Very light blue background for the link button */
-    border: 1px solid var(--primary-blue);
-    border-radius: 8px;
+    padding: 20px;
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.service-icon {
+    font-size: 2em;
+    color: var(--primary-color);
+    min-width: 40px; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style the <img> tag used for custom logos */
+.service-icon img {
+    width: 40px; 
+    height: 40px;
+    object-fit: contain; 
+}
+
+.service-info {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.service-title {
+    font-size: 1.25em;
+    margin: 0;
+}
+
+.service-description {
+    color: var(--secondary-text);
+    font-size: 0.9em;
+}
+
+.redirect-icon, .toggle-icon {
+    font-size: 1.1em;
+    color: var(--secondary-text);
+    margin-left: 15px;
+    transition: transform 0.3s;
+}
+
+.details-toggle:checked + .card-header .toggle-icon {
+    transform: rotate(180deg);
+}
+
+
+/* --- CSS-Only Dropdown Functionality --- */
+.card-details {
+    max-height: 0;
+    padding: 0 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding 0.4s ease-out;
+    border-top: 1px solid transparent; 
+}
+
+.details-toggle:checked ~ .card-details {
+    max-height: 300px; 
+    padding: 15px 20px 20px; 
+    opacity: 1;
+    visibility: visible;
+    border-top: 1px solid #eee; 
+}
+
+/* --- Dropdown Content Styling --- */
+.detail-text {
+    margin-bottom: 10px;
+    font-size: 0.95em;
+    color: var(--text-color);
+}
+
+.highlight {
+    font-weight: bold;
+    color: var(--primary-color);
+    background-color: var(--bg-color); 
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+
+.detail-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 6px;
     text-decoration: none;
-    transition: all 0.2s ease-in-out;
-    color: var(--primary-blue);
     font-weight: 600;
-    font-size: 1.05em;
-    gap: 15px; /* Space between logo and text */
+    margin-top: 10px;
+    transition: background-color 0.2s;
 }
 
-.subdomain-link:hover {
-    background-color: var(--primary-blue);
-    color: var(--card-white);
-    box-shadow: 0 4px 8px rgba(0, 119, 182, 0.4);
-    transform: translateY(-2px);
+.detail-button:hover {
+    background-color: #0056a0; 
 }
 
-.subdomain-link:hover .logo {
-    /* Optional: If using an SVG, you can change its fill color on hover */
-    filter: brightness(0) invert(1); 
-}
 
-.logo {
-    height: 30px; /* Sizing the logo */
-    width: 30px;
-    /* This filter is a placeholder. It assumes your logo is a dark color. 
-       It turns the dark logo white for the hover state. */
-    transition: filter 0.2s ease-in-out;
-}
-
-/* 5. Footer (Optional) */
+/* --- B. Footer Styling (Corrected Width & Alignment) --- */
 footer {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
+    width: 100%; /* Spans the full width of the browser */
+    
+    margin-top: 0; 
+    padding: 20px 0;
+    
+    /* Flexbox for centering button/text group */
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    gap: 15px; 
+
+    color: var(--secondary-text); 
+    font-size: 0.85em;
+    border-top: 1px solid #ddd; 
+    background-color: var(--card-bg);
+    flex-shrink: 0;
 }
 
-footer p {
-    font-size: 0.8em;
-    color: #aaaaaa;
+/* --- Dark Mode Toggle Button Styling --- */
+.mode-toggle {
+    background: none;
+    border: none;
+    font-size: 1.25em;
+    color: var(--secondary-text);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.mode-toggle:hover {
+    color: var(--primary-color);
+}
+
+/* --- Dark Mode Definition --- */
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode .service-card,
+body.dark-mode footer {
+    background-color: var(--dark-card-bg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); 
+}
+
+body.dark-mode .service-title {
+    color: var(--dark-text-color);
+}
+
+body.dark-mode .service-description,
+body.dark-mode .redirect-icon,
+body.dark-mode .toggle-icon,
+body.dark-mode footer p {
+    color: var(--dark-secondary-text);
+}
+
+body.dark-mode .highlight {
+    background-color: var(--dark-bg); 
+    color: var(--primary-color); 
+}
+
+body.dark-mode .card-details {
+    border-top: 1px solid #3d4653; 
 }

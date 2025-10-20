@@ -3,36 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>greatestbritain.org</title>
+    <title>The Command Center</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body>
+<body id="page-body">
 
-    <div class="container">
-        <header>
-            <h1>greatestbritain.org landing page</h1>
+    <div class="content-wrap">
+        <header class="header">
+            <h1>LTE Homelab Hub</h1>
+            <p>The central hub for my current homelab services.</p>
         </header>
 
         <main>
-            <p>Here are the current subdomains:</p>
+            <div class="service-list">
+                
+                <a href="https://media.greatestbritain.org" target="_blank" class="service-card redirect-card">
+                <span class="service-icon">
+                    <img src="jellyfinlogo.svg" alt="Jellyfin Logo">
+                </span> 
+                <div class="service-info">
+                    <h2 class="service-title">Jellyfin</h2>
+                    <p class="service-description">Personal Media Server (Movies & TV Shows)</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square redirect-icon"></i>
+            </a>
+            
+            <div class="service-card detailed-card">
+                <input type="checkbox" id="service-minecraft" class="details-toggle" hidden>
+                <label for="service-minecraft" class="card-header">
+                    <i class="fa-solid fa-cubes service-icon"></i>
+                    <div class="service-info">
+                        <h2 class="service-title">Vanilla Minecraft Server</h2>
+                        <p class="service-description">Private Survival World</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                </label>
 
-            <div class="subdomain-list">
-                <a href="https://media.greatestbritain.org" class="subdomain-link" target="_blank">
-                    <img src="jellyfinlogo.svg" alt="Jellyfin Logo" class="logo">
-                    <span class="link-text">Jellyfin Media Server</span>
-                </a>
+                <div class="card-details">
+                    <p><span class="highlight">Currently unavailable</span> <class="detail-text"></p>
+                    <p style="padding: 1%;">No minecraft server is currently being hosted.</p>
+                </div>
+
+                <!--
+                <div class="card-details">
+                    <p class="detail-text">Server IP: <span class="highlight">ip-address:external-port</span></p>
+                    <p class="detail-text">Version: <span class="highlight">version</span></p>
+                    <a href="external_url" target="_blank" class="detail-button">
+                        Join Server
+                        <i class="fa-solid fa-gamepad"></i>
+                    </a>
+                </div>
+                -->
             </div>
+                
+            <a href="https://performance.greatestbritain.org" target="_blank" class="service-card redirect-card">
+                <i class="fa-solid fa-chart-line service-icon"></i>
+                <div class="service-info">
+                    <h2 class="service-title">Netdata</h2>
+                    <p class="service-description">Server & System Performance Metrics</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square redirect-icon"></i>
+            </a>
+            </div>
+            <!-- Example block with hyperlink for future reference 
+            <a href="URL" target="_blank" class="service-card redirect-card">
+                <i class="fa-solid fa-chart-line service-icon"></i>
+                <div class="service-info">
+                    <h2 class="service-title">Jellyfin</h2>
+                    <p class="service-description">Personal Media Server (Movies & TV Shows)</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square redirect-icon"></i>
+            </a> -->
+            
+            <!-- Example block with drop-down for future reference
+            <div class="service-card detailed-card">
+                <input type="checkbox" id="service-plex" class="details-toggle" hidden>
+                
+                <label for="service-plex" class="card-header">
+                    <i class="fa-solid fa-tv service-icon"></i>
+                    <div class="service-info">
+                        <h2 class="service-title">Plex</h2>
+                        <p class="service-description">Secondary Media Server (Music)</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                </label>
+
+                <div class="card-details">
+                    <p class="detail-text">Direct URL: <span class="highlight">plex.yourdomain.com</span></p>
+                    <p class="detail-text">Requires a <span class="highlight">Plex Pass</span> login to access.</p>
+                    <a href="http://plex.yourdomain.com" target="_blank" class="detail-button">
+                        Go to Plex
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div> -->
         </main>
     </div>
-
     <footer>
+        <button id="dark-mode-toggle" class="mode-toggle">
+            </button>
         <p>&copy; 2025 greatestbritain.org</p>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
